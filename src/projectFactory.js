@@ -26,20 +26,5 @@ export function createProject(name) {
 
 
 
-//   const project1 = createProject("Household Work");
-
-//   const task1 = createTodo(" Dishses", "Clean the Dishses", "2023-11-28", "high");
-
-//   const task2 = createTodo("vaccum", "vaccumm carpet", "2023-11-28", "high");
-
-//   project1.addTodo(task1);
-//   project1.addTodo(task2);
-
-//   console.log(project1.getTodos());
-
-// project1.removeTodo(task1);
-
-// console.log(project1.getTodos());
-
 
 

@@ -1,23 +1,22 @@
 import { createProject } from './projectFactory.js';
-import { createTodo } from "./todoFactory.js";
+import { createTodo } from './todoFactory.js';
 
 export const projectManager = {
   projects: [],
   currentProject: null,
   
   initializeProjects(savedProjects) {
-    // Initialize projects from local storage or create a default project
-    // Add them to the projects array
-  
     if (savedProjects && Array.isArray(savedProjects) && savedProjects.length > 0) {
       this.projects = savedProjects;
-      this.currentProject = this.projects[0]; 
+      this.currentProject = this.projects[0];
     } else {
-      // Create a default project using the projectFactory
       const Inbox = createProject('Inbox');
+      console.log(Inbox);
       this.projects.push(Inbox);
-      this.currentProject = Inbox; 
+      this.currentProject = Inbox;
     }
+
+    console.log("After initializeProjects, currentProject:", this.currentProject);
   },
   addProject(project) {
     
@@ -26,6 +25,8 @@ export const projectManager = {
   },
 
   addTodoToProject(project, todo) {
+  console.log("Adding todo to project:", project);
+  console.log("Todo to add:", todo);
     project.addTodo(todo);
   },
 
@@ -51,40 +52,6 @@ export const projectManager = {
 };
 
 
-//    const project1 = createProject("Household Work");
-
-//     const task1 = createTodo(" Dishses", "Clean the Dishses", "2023-11-28", "high");
-
-//    const task2 = createTodo("vaccum", "vaccumm carpet", "2023-11-28", "high");
-
-//    project1.addTodo(task1);
-//    project1.addTodo(task2);
-
-//    const projects = projectManager; 
-
-//     projectManager.initializeProjects();
-
-//    projectManager.addProject(project1); 
-
-//    projectManager.addTodoToProject(project1, task1);
-   
-//    projectManager.addTodoToProject(project1, task2);
-
-//    console.log( projectManager['projects']); 
-
-//    console.log(projectManager.currentProject);
-
-//    projectManager.switchProject(project1);
-
-//    console.log(projectManager.currentProject);
-
-//    console.log(projectManager.currentProject.removeTodo(task1));
-
-//    console.log(projectManager.currentProject);
-
-//    projectManager.removeProject(project1);
-
-//    console.log( projectManager['projects']); 
 
 
 

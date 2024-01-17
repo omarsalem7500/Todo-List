@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +9,7 @@
 <body>
   <div class="panel">
     <h1>To Do Tracker</h1>
-    <button type="button" class="add-project-btn">Add Project</button>
+    <!-- <button type="button" class="add-project-btn">Add Project</button> -->
     <div class="form-container"></div>
     <h2>Your Projects</h2>
     <div class="projectsList">
@@ -25,6 +24,32 @@
         <!-- Todos will be dynamically added here -->
       </div>
     </div>
+  </div>
+
+  <!-- Updated UI Elements -->
+  <button id="addProjectBtn">Add Project</button>
+  <button id="addTodoBtn">Add Todo</button>
+  <div id="projectsList"></div>
+  <div id="todosList"></div>
+
+  <!-- Project Form -->
+  <div id="projectForm" style="display: none;">
+    <label for="projectName">Project Name:</label>
+    <input type="text" id="projectName" />
+    <button id="submitProjectBtn">Submit</button>
+  </div>
+
+  <!-- Todo Form -->
+  <div id="todoForm" style="display: none;">
+    <label for="todoTitle">Todo Title:</label>
+    <input type="text" id="todoTitle" />
+    <label for="todoDescription">Description:</label>
+    <input type="text" id="todoDescription" />
+    <label for="todoDueDate">Due Date:</label>
+    <input type="text" id="todoDueDate" />
+    <label for="todoPriority">Priority:</label>
+    <input type="text" id="todoPriority" />
+    <button id="submitTodoBtn">Submit</button>
   </div>
   
   <script src="main.js"></script>

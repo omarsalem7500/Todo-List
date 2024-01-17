@@ -27,14 +27,4 @@ export function createTodo(title, description, dueDate, priority) {
 
 
 
-  const task1 =  createTodo(" Dishses", "Clean the Dishses", "2023-11-28", "high");
-
-  console.log(task1);
-
-  task1.updateDetails("Dishes");
-
-  task1.markAsComplete();
-
-  console.log(task1);
-    
     
