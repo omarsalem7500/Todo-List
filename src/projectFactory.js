@@ -19,6 +19,14 @@ export function createProject(name) {
       getTodos() {
         return this.todos;
       },
+
+      // updateDetails(newTitle, newDescription, newDueDate, newPriority) {
+      //   this.title = newTitle || this.title;
+      //   this.description = newDescription || this.description;
+      //   this.dueDate = newDueDate || this.dueDate;
+      //   this.priority = newPriority || this.priority;
+
+      // },
       
       // other methods
     };

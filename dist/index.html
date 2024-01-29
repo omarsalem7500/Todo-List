@@ -9,20 +9,12 @@
 <body>
   <div class="panel">
     <h1>To Do Tracker</h1>
-    <!-- <button type="button" class="add-project-btn">Add Project</button> -->
     <div class="form-container"></div>
     <h2>Your Projects</h2>
-    <div class="projectsList">
-      <!-- Projects will be dynamically added here -->
-    </div>
+    <div class="projectsList"></div>
     <h2>Active Project Todos</h2>
     <div class="activeProjectTodos">
-      <!-- Todos for the active project will be dynamically added here -->
-      
-      <!-- Add the todosList container within activeProjectTodos -->
-      <div class="todosList">
-        <!-- Todos will be dynamically added here -->
-      </div>
+      <div class="todosList"></div>
     </div>
   </div>
 
@@ -46,9 +38,13 @@
     <label for="todoDescription">Description:</label>
     <input type="text" id="todoDescription" />
     <label for="todoDueDate">Due Date:</label>
-    <input type="text" id="todoDueDate" />
+    <input type="date" id="todoDueDate" />
     <label for="todoPriority">Priority:</label>
-    <input type="text" id="todoPriority" />
+    <select id="todoPriority">
+      <option value="low">Low</option>
+      <option value="medium">Medium</option>
+      <option value="high">High</option>
+    </select>
     <button id="submitTodoBtn">Submit</button>
   </div>
   
