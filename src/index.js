@@ -2,7 +2,11 @@ import { projectManager } from './projectManager.js';
 
 import { domHandler}  from './domHandler.js';
 
+
+// projectManager.loadProjectsFromLocalStorage();
+
 projectManager.initializeProjects();
+//domHandler.initializeProjects();
 console.log("After initialization, currentProject:", projectManager.currentProject);
 
 domHandler.initializeEventListeners();

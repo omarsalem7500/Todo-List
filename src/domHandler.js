@@ -153,9 +153,43 @@ import { createProject } from './projectFactory.js';
 
 export const domHandler = {
   initializeEventListeners: () => {
-    const addProjectBtn = document.getElementById('addProjectBtn');
-    const addTodoBtn = document.getElementById('addTodoBtn');
+    // ... (existing event listeners)
 
+    // Move the code for creating and displaying the "Inbox" project outside the event listeners
+    const projectsList = document.querySelector('.projectsList');
+
+    // Create a DOM element for the "Inbox" project
+    const inboxProjectContainer = document.createElement('div');
+    inboxProjectContainer.classList.add('project-container');
+
+    const inboxProjectHeader = document.createElement('h3');
+    inboxProjectHeader.textContent = 'Inbox';
+
+    inboxProjectContainer.appendChild(inboxProjectHeader);
+
+    const deleteButtonInbox = domHandler.createButton('Delete', () => {
+      // Handle delete action for the "Inbox" project
+      console.log("Deleting Inbox project is not allowed");
+    });
+
+    inboxProjectContainer.appendChild(deleteButtonInbox);
+
+    // Add a click event listener to switch to the "Inbox" project when clicked
+    inboxProjectContainer.addEventListener('click', () => {
+      projectManager.switchProject(projectManager.projects[0]);
+      const todosList = document.getElementById('todosList');
+      todosList.innerHTML = '';
+
+      projectManager.currentProject.getTodos().forEach(todo => {
+        const todoContainer = domHandler.createTodoContainer(todo);
+        todosList.appendChild(todoContainer);
+      });
+    });
+
+    // Append the "Inbox" project to the projects list
+    projectsList.appendChild(inboxProjectContainer);
+
+    // Add the following code to the existing event listeners
     addProjectBtn.addEventListener('click', () => {
       domHandler.clearForms();
       document.getElementById('projectForm').style.display = 'block';
@@ -168,9 +202,6 @@ export const domHandler = {
       document.getElementById('projectForm').style.display = 'none'; // Hide project form
     });
 
-    const submitProjectBtn = document.getElementById('submitProjectBtn');
-    const submitTodoBtn = document.getElementById('submitTodoBtn');
-
     submitProjectBtn.addEventListener('click', () => {
       domHandler.handleSubmitProject();
       document.getElementById('projectForm').style.display = 'none'; // Hide project form after submission
@@ -181,6 +212,11 @@ export const domHandler = {
       document.getElementById('todoForm').style.display = 'none'; // Hide todo form after submission
     });
   },
+
+  // ... (existing code)
+  
+
+
 
   clearForms: () => {
     const projectForm = document.getElementById('projectForm');
@@ -245,9 +281,16 @@ export const domHandler = {
       <p>Due Date: ${todo.dueDate}</p>
       <p>Priority: ${todo.priority}</p>
       <p>Description: ${todo.description}</p>
+      <p>Complete: <input type="checkbox" ${todo.isComplete ? 'checked' : ''} id="completeCheckbox"></p>
     `;
+    const completeCheckbox = detailsContainer.querySelector('#completeCheckbox');
+    completeCheckbox.addEventListener('change', () => {
+      todo.updateDetails(undefined, undefined, undefined, undefined, completeCheckbox.checked);
+    });
     return detailsContainer;
   };
+
+
 
   const deleteButtonTodo = domHandler.createButton('Delete', () => {
     projectManager.currentProject.removeTodo(todo);
@@ -379,3 +422,4 @@ export const domHandler = {
     }
   },
 };
+
