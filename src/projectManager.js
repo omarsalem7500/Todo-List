@@ -4,6 +4,37 @@ import { createTodo } from './todoFactory.js';
 export const projectManager = {
   projects: [],
   currentProject: null,
+
+
+  // saveProjectsToLocalStorage() {
+  //   localStorage.setItem('projects', JSON.stringify(this.projects));
+  // },
+
+  // loadProjectsFromLocalStorage() {
+  //   const savedProjects = JSON.parse(localStorage.getItem('projects'));
+  //   if (savedProjects) {
+  //     this.initializeProjects(savedProjects);
+  //   }
+  // },
+
+  saveProjectsToLocalStorage() {
+    localStorage.setItem('projects', JSON.stringify(this.projects));
+  },
+
+  loadProjectsFromLocalStorage() {
+    const savedProjects = JSON.parse(localStorage.getItem('projects'));
+    if (savedProjects) {
+      // Recreate the project objects with their methods
+      this.projects = savedProjects.map(projectData => {
+        const project = createProject(projectData.name);
+        project.todos = projectData.todos.map(todoData => {
+          return createTodo(todoData.title, todoData.description, todoData.dueDate, todoData.priority, todoData.isComplete);
+        });
+        return project;
+      });
+      this.currentProject = this.projects[0];
+    }
+  },
   
   initializeProjects(savedProjects) {
     if (savedProjects && Array.isArray(savedProjects) && savedProjects.length > 0) {
@@ -48,9 +79,9 @@ export const projectManager = {
     if (projectToRemove === this.currentProject) {
       this.currentProject = this.projects[0] || null; // Set the first project as the current one, or null if no projects left
     }
+    
   },
 };
-
 
 
 

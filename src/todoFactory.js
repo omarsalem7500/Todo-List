@@ -2,7 +2,12 @@ import { format, parseISO } from 'date-fns';
 
 
 export function createTodo(title, description, dueDate, priority) {
-    const parsedDueDate = parseISO(dueDate);
+    // const parsedDueDate = parseISO(dueDate);
+    // const formattedDueDate = format(parsedDueDate, "MMM d, yyyy h:mm a");
+
+    const isoDueDate = new Date(dueDate).toISOString();
+
+    const parsedDueDate = parseISO(isoDueDate);
     const formattedDueDate = format(parsedDueDate, "MMM d, yyyy h:mm a");
     return {
       title,
