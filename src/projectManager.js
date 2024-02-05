@@ -69,18 +69,44 @@ export const projectManager = {
     return this.projects;
   },
 
+  // removeProject(projectToRemove) {
+  //   const index = this.projects.indexOf(projectToRemove);
+  //   if (index !== -1) {
+  //     this.projects.splice(index, 1);
+  //   }
+
+    
+  //   if (projectToRemove === this.currentProject) {
+  //     this.currentProject = this.projects[0] || null; // Set the first project as the current one, or null if no projects left
+  //   }
+    
+  // },
+
   removeProject(projectToRemove) {
     const index = this.projects.indexOf(projectToRemove);
     if (index !== -1) {
+      // Remove the project from the projects array
       this.projects.splice(index, 1);
+  
+      // Loop through all projects and delete todos associated with the removed project
+      this.projects.forEach(project => {
+        project.getTodos().forEach(todo => {
+          const todoIndex = project.todos.indexOf(todo);
+          if (todoIndex !== -1) {
+            project.todos.splice(todoIndex, 1);
+          }
+        });
+      });
     }
-
-    
+  
     if (projectToRemove === this.currentProject) {
-      this.currentProject = this.projects[0] || null; // Set the first project as the current one, or null if no projects left
+      this.currentProject = this.projects[0] || null;
     }
-    
+  
+    // Save the changes to local storage
+    this.saveProjectsToLocalStorage();
   },
+  
 };
 
 

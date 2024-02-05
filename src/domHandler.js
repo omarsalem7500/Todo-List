@@ -7,42 +7,7 @@ export const domHandler = {
   initializeEventListeners: () => {
 
     
-    // ... (existing event listeners)
-
-    // Move the code for creating and displaying the "Inbox" project outside the event listeners
-    const projectsList = document.querySelector('.projectsList');
-
-    // Create a DOM element for the "Inbox" project
-    // const inboxProjectContainer = document.createElement('div');
-    // inboxProjectContainer.classList.add('project-container');
-
-    // const inboxProjectHeader = document.createElement('h3');
-    // inboxProjectHeader.textContent = 'Inbox';
-
-    // inboxProjectContainer.appendChild(inboxProjectHeader);
-
-    // const deleteButtonInbox = domHandler.createButton('Delete', () => {
-    //   // Handle delete action for the "Inbox" project
-    //   console.log("Deleting Inbox project is not allowed");
-    // });
-
-    // inboxProjectContainer.appendChild(deleteButtonInbox);
-
-    // // Add a click event listener to switch to the "Inbox" project when clicked
-    // inboxProjectContainer.addEventListener('click', () => {
-    //   projectManager.switchProject(projectManager.projects[0]);
-    //   const todosList = document.getElementById('todosList');
-    //   todosList.innerHTML = '';
-
-    //   projectManager.currentProject.getTodos().forEach(todo => {
-    //     const todoContainer = domHandler.createTodoContainer(todo);
-    //     todosList.appendChild(todoContainer);
-    //   });
-    // });
-
-    // // Append the "Inbox" project to the projects list
-    // projectsList.appendChild(inboxProjectContainer);
-
+   
     // Add the following code to the existing event listeners
     addProjectBtn.addEventListener('click', () => {
       domHandler.clearForms();
@@ -213,6 +178,72 @@ export const domHandler = {
 
   
 
+  // handleSubmitProject: () => {
+  //   const projectNameInput = document.getElementById('projectName');
+  //   const projectName = projectNameInput.value;
+  //   const projectsList = document.querySelector('.projectsList');
+
+  //   if (projectName) {
+  //     const project = createProject(projectName);
+  //     projectManager.currentProject = project;
+
+  //     const projectContainer = document.createElement('div');
+  //     projectContainer.classList.add('project-container');
+
+  //     const projectHeader = document.createElement('h3');
+  //     projectHeader.textContent = projectName;
+
+  //     projectContainer.appendChild(projectHeader);
+
+  //     const deleteButtonProject = domHandler.createButton('Delete', () => {
+  //       projectManager.removeProject(project);
+  //       projectManager.saveProjectsToLocalStorage();
+  //       console.log(projectManager.getProjects());
+  //      // projectContainer.innerHTML = '';
+  //     //  projectContainer.parentNode.removeChild(projectContainer);
+
+  //     const projectsList = document.querySelector('.projectsList');
+  //    projectsList.removeChild(projectContainer);
+  //     //projectContainer.remove();
+  //     });
+
+  //     projectContainer.appendChild(deleteButtonProject);
+  //     projectManager.addProject(project);
+
+  //     projectContainer.addEventListener('click', () => {
+  //       projectManager.currentProject = project;
+  //       const todosList = document.getElementById('todosList');
+  //       todosList.innerHTML = '';
+
+  //       project.getTodos().forEach(todo => {
+  //         const todoContainer = domHandler.createTodoContainer(todo);
+  //         todosList.appendChild(todoContainer);
+  //       });
+  //     });
+
+  //     projectsList.appendChild(projectContainer);
+  //     domHandler.clearForms();
+  //     projectManager.saveProjectsToLocalStorage();
+  //   }
+  // },
+
+  removeProjectContainer: (projectContainer) => {
+    const projectsList = document.querySelector('.projectsList');
+    projectsList.removeChild(projectContainer);
+
+    // Remove associated todos from the DOM
+    const todosList = document.getElementById('todosList');
+    todosList.innerHTML = ''; // Clear the todosList
+
+    // Get the current project's todos and recreate their containers in the todosList
+    if (projectManager.currentProject) {
+      projectManager.currentProject.getTodos().forEach(todo => {
+        const todoContainer = domHandler.createTodoContainer(todo);
+        todosList.appendChild(todoContainer);
+      });
+    }
+  },
+
   handleSubmitProject: () => {
     const projectNameInput = document.getElementById('projectName');
     const projectName = projectNameInput.value;
@@ -234,12 +265,7 @@ export const domHandler = {
         projectManager.removeProject(project);
         projectManager.saveProjectsToLocalStorage();
         console.log(projectManager.getProjects());
-       // projectContainer.innerHTML = '';
-      //  projectContainer.parentNode.removeChild(projectContainer);
-
-      const projectsList = document.querySelector('.projectsList');
-     projectsList.removeChild(projectContainer);
-      //projectContainer.remove();
+        domHandler.removeProjectContainer(projectContainer);
       });
 
       projectContainer.appendChild(deleteButtonProject);
