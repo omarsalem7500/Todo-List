@@ -234,7 +234,12 @@ export const domHandler = {
         projectManager.removeProject(project);
         projectManager.saveProjectsToLocalStorage();
         console.log(projectManager.getProjects());
-        projectContainer.innerHTML = '';
+       // projectContainer.innerHTML = '';
+      //  projectContainer.parentNode.removeChild(projectContainer);
+
+      const projectsList = document.querySelector('.projectsList');
+     projectsList.removeChild(projectContainer);
+      //projectContainer.remove();
       });
 
       projectContainer.appendChild(deleteButtonProject);
